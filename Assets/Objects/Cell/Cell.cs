@@ -28,4 +28,10 @@ public class Cell : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void SetCellState(GridManager.CellState cellState)
+    {
+        gameObject.GetComponent<Renderer>().material.color = cellState.CellColor;
+    }
+
 }

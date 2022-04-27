@@ -30,10 +30,13 @@ class CellBase
         _cellObject = cellPrefab.CreateCellObject(position,parentTransform,cellPrefab);
     }
 
-
-
     public void ClearCellOject()
     {
         _cellObject.DestroyCellObject();
+    }
+
+    public void SetCellObjectState(GridManager.CellState cellState)
+    {
+        _cellObject.SetCellState(cellState);
     }
 }

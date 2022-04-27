@@ -24,16 +24,16 @@ class GridBase
         ClearGrid(); // If grid allready created - delete all cells
 
 
-        for (int z = 0; z < size.z; z++) // filling 3d list
+        for (int x = 0; x < size.x; x++) // filling 3d list
         {
             List<List<CellBase>> grid_xy = new List<List<CellBase>>(); // temp 2d list 
             for (int y = 0; y < size.y; y++)
             {
                 List<CellBase> grid_x = new List<CellBase>(); // temp list of cells
-                for (int x = 0; x < size.x; x++)
+                for (int z = 0; z < size.z; z++)
                 {
                     // add cell to list with CellBase class constructor
-                    grid_x.Add(new CellBase(0, new Vector3(x + (gap * x) + transform.position.x, y + (gap * y) + transform.position.y, z + (gap * z) + transform.position.z),transform,cellPrefab));
+                    grid_x.Add(new CellBase(0, new Vector3(x + (gap * x) + transform.position.x, y + (gap * y) + transform.position.y, z + (gap * z) + transform.position.z), transform, cellPrefab));
                 }
 
                 grid_xy.Add(grid_x);
@@ -56,5 +56,39 @@ class GridBase
         }
 
         Grid_xyz.Clear(); // Clear 3d list
+    }
+
+    public void SetCellsState(GridManager.CellState cellState)
+    {
+        foreach (List<List<CellBase>> grid_xy in Grid_xyz)
+        {
+            foreach (List<CellBase> grid_x in grid_xy)
+            {
+                foreach (CellBase cell in grid_x)
+                {
+                    cell.SetCellObjectState(cellState);
+                }
+            }
+        }
+    }
+
+    public void SetCellState(GridManager.CellState cellState, Vector3Int index)
+    {
+        if(index.z < Grid_xyz.Count && index.y < Grid_xyz[index.z].Count && index.x < Grid_xyz[index.z][index.y].Count)
+        {
+            Grid_xyz[index.z][index.y][index.x].SetCellObjectState(cellState);
+        }
+    }
+
+    public void SetCellState(GridManager.CellState cellState)
+    {
+        int randomX_Index = Random.Range(0, Grid_xyz.Count-1);
+        int randomY_Index = Random.Range(0, Grid_xyz[randomX_Index].Count);
+        int randomZ_Index = Random.Range(0, Grid_xyz[randomX_Index][randomY_Index].Count);
+
+
+        Vector3Int randomIndex = new Vector3Int(randomX_Index, randomY_Index, randomZ_Index);
+        Debug.Log(randomIndex);
+        Grid_xyz[randomIndex.x][randomIndex.y][randomIndex.z].SetCellObjectState(cellState);
     }
 }
