@@ -7,7 +7,6 @@ public class GridManager : MonoBehaviour
 
     /* TODO :
         1) Remake CellTemplate like GridBase
-
     */
 
     private GridBase _grid = new GridBase();
