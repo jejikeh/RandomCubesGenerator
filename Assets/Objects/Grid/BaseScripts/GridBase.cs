@@ -1,32 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 class GridBase
 {
-    public List<List<List<CellTemplate>>> Grid_xyz;
-    private Vector3 _size;
-    public Vector3 Size { get { return _size; } }
+    public List<List<List<CellBase>>> Grid_xyz; // wow, 3d list 
 
     public GridBase()
     {
-        Grid_xyz = new List<List<List<CellTemplate>>>();
+        Grid_xyz = new List<List<List<CellBase>>>();
+        // FillGrid() - You can call FillGrid in the constructor, but I like to call the method separately
     }
 
-    public void FillGrid(Vector3 size,float gap)
+    /*
+
+        FillGrid - 
+        initializes a 3d list and creates game objects at the specified coordinates.
+        Before that, deletes all objects in the array.
+
+    */
+    public void FillGrid(Vector3 size,float gap,Transform transform, Cell cellPrefab)
     {
-        _size = size;
-        Grid_xyz.Clear();
-        Debug.Log(size);
-        for (int z = 0; z < size.z; z++)
+
+        ClearGrid(); // If grid allready created - delete all cells
+
+
+        for (int z = 0; z < size.z; z++) // filling 3d list
         {
-            List<List<CellTemplate>> grid_xy = new List<List<CellTemplate>>();
+            List<List<CellBase>> grid_xy = new List<List<CellBase>>(); // temp 2d list 
             for (int y = 0; y < size.y; y++)
             {
-                List<CellTemplate> grid_x = new List<CellTemplate>();
+                List<CellBase> grid_x = new List<CellBase>(); // temp list of cells
                 for (int x = 0; x < size.x; x++)
                 {
-                    grid_x.Add(new CellTemplate(0, new Vector3(x + (gap * x), y + (gap * y), z + (gap * z))));
+                    // add cell to list with CellBase class constructor
+                    grid_x.Add(new CellBase(0, new Vector3(x + (gap * x) + transform.position.x, y + (gap * y) + transform.position.y, z + (gap * z) + transform.position.z),transform,cellPrefab));
                 }
 
                 grid_xy.Add(grid_x);
@@ -35,17 +42,19 @@ class GridBase
         }
     }
 
-    public void DebugPrintCells()
+    public void ClearGrid() // delete every game object in a 3d list
     {
-        foreach (List<List<CellTemplate>> grid_xy in Grid_xyz)
+        foreach (List<List<CellBase>> grid_xy in Grid_xyz)
         {
-            foreach (List<CellTemplate> grid_x in grid_xy)
+            foreach (List<CellBase> grid_x in grid_xy)
             {
-                foreach (CellTemplate cell in grid_x)
+                foreach (CellBase cell in grid_x)
                 {
-                    Debug.Log(cell.Value);
+                    cell.ClearCellOject();
                 }
             }
         }
+
+        Grid_xyz.Clear(); // Clear 3d list
     }
 }

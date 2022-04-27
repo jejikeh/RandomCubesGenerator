@@ -1,44 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-class CellTemplate
-{
-    private int _value;
-    public int Value { get { return _value; }}
-    public Cell CellObject;
-
-    private Vector3 _position;
-    public Vector3 Position { get { return _position; } }
-
-    public CellTemplate(int value, Vector3 position)
-    {
-        _value = value;
-        _position = position;
-    }
-
-    public void SetObject(Cell cellObject)
-    {
-        CellObject = cellObject;
-    }
-
-    public void DestroyObject()
-    {
-        
-        CellObject.DestroyCell();
-    }
-
-}
 
 public class Cell : MonoBehaviour
 {
-    public void SetPosition(Vector3 position)
+
+    /*
+
+        CreateCellObject - 
+        I do not know what this method does, 
+        but I can say for sure that it does NOT create an object, 
+        and even more so it does NOT return it!
+    
+    */
+
+    public Cell CreateCellObject(Vector3 position,Transform parentTransform,Cell cellPrefab)
     {
-        transform.position = position;
+        GameObject cellObject = Instantiate(cellPrefab.gameObject);
+        cellObject.transform.position = position;
+
+        cellObject.name = ToString(); // Keeps the editor tidy and clean
+        cellObject.transform.SetParent(parentTransform, true); // Keeps the editor tidy and clean
+
+
+        return cellObject.GetComponent<Cell>();
     }
 
-    public void DestroyCell()
+    public void DestroyCellObject()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
