@@ -22,7 +22,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] private CellState _unset = new CellState(new Color(1,1,1,0.3f));
     [SerializeField] private CellState _active = new CellState(new Color(1, 1, 1, 0.3f));
 
-
     private GridBase _grid = new GridBase();
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private float _gap;
@@ -32,8 +31,8 @@ public class GridManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Vector3 randomSize = new Vector3(Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10));
-            _grid.FillGrid(randomSize,_gap,transform,_cellPrefab.GetComponent<Cell>());
-            _grid.SetCellsState(_unset);
+            _grid.FillGrid(randomSize,_gap,transform,_cellPrefab.GetComponent<Cell>(),_unset);
+            
             _grid.SetCellState(_active);
         }
     }

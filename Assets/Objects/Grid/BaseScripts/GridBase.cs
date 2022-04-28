@@ -18,7 +18,7 @@ class GridBase
         Before that, deletes all objects in the array.
 
     */
-    public void FillGrid(Vector3 size,float gap,Transform transform, Cell cellPrefab)
+    public void FillGrid(Vector3 size,float gap,Transform transform, Cell cellPrefab,GridManager.CellState defaultState)
     {
 
         ClearGrid(); // If grid allready created - delete all cells
@@ -40,6 +40,8 @@ class GridBase
             }
             Grid_xyz.Add(grid_xy);
         }
+
+        SetCellsState(defaultState); // Spawn object unset by default
     }
 
     public void ClearGrid() // delete every game object in a 3d list

@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unset:
-    CellColor: {r: 0.8207547, g: 0.5161979, b: 0.5161979, a: 0.18431373}
+    CellColor: {r: 1, g: 1, b: 1, a: 0.16862746}
   _active:
     CellColor: {r: 0.2624039, g: 0.764151, b: 0.23549302, a: 0.90588236}
   _cellPrefab: {fileID: 3399080557690261181, guid: 2ac9d7f7c8d969b42bf60e3b05b40aeb,
