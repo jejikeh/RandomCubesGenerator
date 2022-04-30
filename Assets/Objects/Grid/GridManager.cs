@@ -7,20 +7,22 @@ public class GridManager : MonoBehaviour
         -- 1) Remake CellTemplate like GridBase.cs
         -- 2) Remove _size in GridBase.cs
 
-        3) Clean some unused fileds
+        -- 3) Clean some unused fileds
+
+        4) use now the animations to handle states
     */
 
     [System.Serializable]
     public class CellState
     {
-        public Color CellColor;
-        public CellState(Color color)
+        public AnimationClip AnimationState;
+        public CellState(AnimationClip clip)
         {
-            CellColor = color;
+            AnimationState = clip;
         }
     }
-    [SerializeField] private CellState _unset = new CellState(new Color(1,1,1,0.3f));
-    [SerializeField] private CellState _active = new CellState(new Color(1, 1, 1, 0.3f));
+    [SerializeField] private CellState _unset;
+    [SerializeField] private CellState _active;
 
     private GridBase _grid = new GridBase();
     [SerializeField] private GameObject _cellPrefab;

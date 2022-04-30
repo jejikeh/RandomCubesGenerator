@@ -3,6 +3,7 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
 
+    private GridManager.CellState _cellState;
     /*
 
         CreateCellObject - 
@@ -12,13 +13,16 @@ public class Cell : MonoBehaviour
     
     */
 
-    public Cell CreateCellObject(Vector3 position,Transform parentTransform,Cell cellPrefab)
+
+    public Cell CreateCellObject(Vector3 position,Transform parentTransform,Cell cellPrefab, GridManager.CellState cellState)
     {
         GameObject cellObject = Instantiate(cellPrefab.gameObject);
         cellObject.transform.position = position;
+        _cellState = cellState;
 
         cellObject.name = ToString(); // Keeps the editor tidy and clean
         cellObject.transform.SetParent(parentTransform, true); // Keeps the editor tidy and clean
+
 
 
         return cellObject.GetComponent<Cell>();
@@ -29,9 +33,10 @@ public class Cell : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetCellState(GridManager.CellState cellState)
+    public void SetCellStateAnimation()
     {
-        gameObject.GetComponent<Renderer>().material.color = cellState.CellColor;
+        //gameObject.GetComponent<AnimationState>().clip = _cellState.AnimationState;
+        gameObject.GetComponent<Animation>().Play();
     }
 
 }

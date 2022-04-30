@@ -6,7 +6,6 @@ class CellBase
     //private Vector3 _position;
     private Cell _cellObject;
 
-
     /*
         
         CellBase -
@@ -18,16 +17,16 @@ class CellBase
         
     */
 
-    public CellBase(int value, Vector3 position,Transform parentTransform,Cell cellPrefab)
+    public CellBase(int value, Vector3 position,Transform parentTransform,Cell cellPrefab,GridManager.CellState cellState)
     {
         //_value = value;
         //_position = position;
-        SetCellObject(position,parentTransform,cellPrefab);
+        SetCellObject(position,parentTransform,cellPrefab,cellState);
     }
 
-    private void SetCellObject(Vector3 position,Transform parentTransform,Cell cellPrefab)
+    private void SetCellObject(Vector3 position,Transform parentTransform,Cell cellPrefab,GridManager.CellState cellState)
     {
-        _cellObject = cellPrefab.CreateCellObject(position,parentTransform,cellPrefab);
+        _cellObject = cellPrefab.CreateCellObject(position,parentTransform,cellPrefab,cellState);
     }
 
     public void ClearCellOject()
@@ -37,6 +36,6 @@ class CellBase
 
     public void SetCellObjectState(GridManager.CellState cellState)
     {
-        _cellObject.SetCellState(cellState);
+        
     }
 }
