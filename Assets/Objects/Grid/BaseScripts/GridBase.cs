@@ -18,7 +18,7 @@ class GridBase
         Before that, deletes all objects in the array.
 
     */
-    public void FillGrid(Vector3 size,float gap,Transform transform, Cell cellPrefab,GridManager.CellState cellState)
+    public void FillGrid(Vector3 size,float gap,Transform transform, Cell cellPrefab,GridManager.CellState cellState,Vector2 randomOffset)
     {
 
         ClearGrid(); // If grid allready created - delete all cells
@@ -33,7 +33,7 @@ class GridBase
                 for (int z = 0; z < size.z; z++)
                 {
                     // add cell to list with CellBase class constructor
-                    grid_x.Add(new CellBase(0, new Vector3(x + (gap * x) + transform.position.x, y + (gap * y) + transform.position.y, z + (gap * z) + transform.position.z), transform, cellPrefab,cellState));
+                    grid_x.Add(new CellBase(new Vector3(x + (gap * x) + transform.position.x + Random.Range(randomOffset.x,randomOffset.y), y + (gap * y) + transform.position.y + Random.Range(randomOffset.x, randomOffset.y), z + (gap * z) + transform.position.z + Random.Range(randomOffset.x, randomOffset.y)), transform, cellPrefab,cellState));
                 }
 
                 grid_xy.Add(grid_x);

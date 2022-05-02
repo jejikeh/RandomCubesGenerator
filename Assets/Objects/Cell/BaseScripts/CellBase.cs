@@ -17,7 +17,7 @@ class CellBase
         
     */
 
-    public CellBase(int value, Vector3 position,Transform parentTransform,Cell cellPrefab,GridManager.CellState cellState)
+    public CellBase(Vector3 position,Transform parentTransform,Cell cellPrefab,GridManager.CellState cellState)
     {
         //_value = value;
         //_position = position;

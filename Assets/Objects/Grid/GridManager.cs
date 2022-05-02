@@ -27,13 +27,14 @@ public class GridManager : MonoBehaviour
     private GridBase _grid = new GridBase();
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private float _gap;
+    [SerializeField] private Vector2 _randomOffset;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
             Vector3 randomSize = new Vector3(Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10));
-            _grid.FillGrid(randomSize,_gap,transform,_cellPrefab.GetComponent<Cell>(),_unset);
+            _grid.FillGrid(randomSize,_gap,transform,_cellPrefab.GetComponent<Cell>(),_unset,_randomOffset);
             
             _grid.SetCellState(_active);
         }
