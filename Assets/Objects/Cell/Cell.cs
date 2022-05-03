@@ -28,6 +28,7 @@ public class Cell : MonoBehaviour
         return cellObject.GetComponent<Cell>();
     }
 
+
     public void DestroyCellObject()
     {
         Destroy(gameObject);

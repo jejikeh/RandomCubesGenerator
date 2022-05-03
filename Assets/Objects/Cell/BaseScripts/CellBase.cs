@@ -1,6 +1,6 @@
 using UnityEngine;
-
-class CellBase
+using System.Threading;
+public class CellBase
 {
     //private int _value; Some time i will use them, i swear
     //private Vector3 _position;
