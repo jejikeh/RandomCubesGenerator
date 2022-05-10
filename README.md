@@ -1,4 +1,4 @@
 
-# CellBuilderSam : Simple game write on Unity
+# Random cubes generator
 
-CellBuilderSam is a grid-based game, where you need a build Cells.
+it`s a random cubes generator
